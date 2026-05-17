@@ -1,0 +1,25 @@
+cluster_name: homelab
+kubeconfig_path: ~/.kube/homelab
+k3s_version: v1.35.4+k3s1
+ingress_controller: traefik
+networking:
+  ssh:
+    port: 22
+    use_agent: true
+    public_key_path: ~/.ssh/id_ed25519.pub
+    private_key_path: ~/.ssh/id_ed25519
+  allowed_networks:
+    ssh: ["0.0.0.0/0"]
+    api: ["0.0.0.0/0"]
+  public_network:
+    ipv4: true
+    ipv6: false
+datastore:
+  mode: etcd
+region: nbg1
+masters_pool:
+  instance_type: cax11
+  instance_count: 1
+  location: nbg1
+schedule_workloads_on_masters: true
+worker_node_pools: []

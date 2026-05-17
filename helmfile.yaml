@@ -1,0 +1,41 @@
+kubeContext: homelab-master1
+
+helmDefaults:
+  timeout: 300
+
+repositories:
+  - name: metrics-server
+    url: https://kubernetes-sigs.github.io/metrics-server/
+  - name: traefik
+    url: https://helm.traefik.io/traefik
+  - name: postgres-operator-charts
+    url: https://opensource.zalando.com/postgres-operator/charts/postgres-operator
+  - name: postgres-operator-ui-charts
+    url: https://opensource.zalando.com/postgres-operator/charts/postgres-operator-ui
+
+releases:
+  - name: metrics-server
+    namespace: kube-system
+    createNamespace: false
+    version: 3.13.0
+    chart: metrics-server/metrics-server
+  - name: traefik
+    namespace: kube-system
+    createNamespace: false
+    chart: traefik/traefik
+    version: 40.2.0
+    values:
+      - values/traefik.yaml
+  - name: postgres-operator
+    namespace: postgres-operator
+    createNamespace: true
+    chart: postgres-operator-charts/postgres-operator
+    version: 1.15.1
+    disableValidation: true
+  - name: postgres-operator-ui
+    namespace: postgres-operator
+    createNamespace: true
+    chart: postgres-operator-ui-charts/postgres-operator-ui
+    version: 1.15.1
+    needs:
+      - postgres-operator
