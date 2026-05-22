@@ -1,0 +1,43 @@
+admin:
+  existingSecret: grafana-admin
+  userKey: admin-user
+  passwordKey: admin-password
+
+ingress:
+  enabled: true
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  hosts:
+    - grafana.jlab.dedyn.io
+
+persistence:
+  enabled: true
+  size: 1Gi
+
+grafana.ini:
+  server:
+    domain: grafana.jlab.dedyn.io
+
+extraSecretMounts:
+  - name: postgres-creds
+    secretName: grafana.clearbook-db.credentials.postgresql.acid.zalan.do
+    mountPath: /etc/secrets/postgres
+    readOnly: true
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: PostgreSQL
+        type: postgres
+        url: clearbook-db.default.svc.cluster.local:5432
+        database: clearbook
+        user: $__file{/etc/secrets/postgres/username}
+        secureJsonData:
+          password: $__file{/etc/secrets/postgres/password}
+        jsonData:
+          sslmode: require
+          postgresVersion: 1600
+          timescaledb: false
+        editable: false

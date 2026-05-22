@@ -1,8 +1,5 @@
 kubeContext: homelab-master1
 
-helmDefaults:
-  timeout: 300
-
 repositories:
   - name: metrics-server
     url: https://kubernetes-sigs.github.io/metrics-server/
@@ -12,8 +9,18 @@ repositories:
     url: https://opensource.zalando.com/postgres-operator/charts/postgres-operator
   - name: postgres-operator-ui-charts
     url: https://opensource.zalando.com/postgres-operator/charts/postgres-operator-ui
+  - name: grafana
+    url: https://grafana.github.io/helm-charts
 
 releases:
+  - name: grafana
+    namespace: default
+    chart: grafana/grafana
+    version: 10.5.15
+    values:
+      - values/grafana.yaml
+    secrets:
+      - secrets/grafana.enc.yaml
   - name: metrics-server
     namespace: kube-system
     createNamespace: false

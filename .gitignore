@@ -1,3 +1,5 @@
 charts/**/secrets.yaml
+secrets/*.yaml
+!secrets/*.enc.yaml
 .env
 .envrc
