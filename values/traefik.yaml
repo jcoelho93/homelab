@@ -45,6 +45,12 @@ certificatesResolvers:
         provider: desec
       storage: /data/acme.json
 
+experimental:
+  plugins:
+    fail2ban:
+      moduleName: "github.com/tommoulard/fail2ban"
+      version: "v0.9.0"
+
 env:
   - name: DESEC_TOKEN
     valueFrom:
