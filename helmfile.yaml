@@ -11,8 +11,17 @@ repositories:
     url: https://opensource.zalando.com/postgres-operator/charts/postgres-operator-ui
   - name: grafana
     url: https://grafana.github.io/helm-charts
+  - name: authelia
+    url: https://charts.authelia.com
 
 releases:
+  - name: authelia
+    namespace: authelia
+    createNamespace: true
+    chart: authelia/authelia
+    version: 0.11.5
+    values:
+      - values/authelia.yaml
   - name: grafana
     namespace: default
     chart: grafana/grafana
@@ -33,6 +42,9 @@ releases:
     version: 40.2.0
     values:
       - values/traefik.yaml
+  - name: middleware
+    namespace: default
+    chart: ./charts/middleware
   - name: postgres-operator
     namespace: postgres-operator
     createNamespace: true

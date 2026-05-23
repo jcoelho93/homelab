@@ -1,0 +1,5 @@
+fail2ban:
+  bantime: "24h"
+  findtime: "5m"
+  maxretry: 3
+  enabled: true

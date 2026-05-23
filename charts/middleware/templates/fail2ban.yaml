@@ -1,0 +1,13 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: fail2ban
+  namespace: default
+spec:
+  plugin:
+    fail2ban:
+      rules:
+        enabled: {{ .Values.fail2ban.enabled }}
+        bantime: {{ .Values.fail2ban.bantime | quote }}
+        findtime: {{ .Values.fail2ban.findtime | quote }}
+        maxretry: {{ .Values.fail2ban.maxretry }}
