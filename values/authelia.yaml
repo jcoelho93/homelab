@@ -1,0 +1,47 @@
+configMap:
+  access_control:
+    rules:
+      - domain: "*.jlab.dedyn.io"
+        policy: one_factor
+  authentication_backend:
+    file:
+      enabled: true
+      path: /secrets/users/users_database.yml
+  session:
+    encryption_key:
+      value: "20OvRYhCJ0sDxapRVpFOmhwhxQu7JA7z3cauCCpsjfc="
+    cookies:
+      - name: authelia_session
+        subdomain: auth
+        domain: jlab.dedyn.io
+        expiration: 1h
+        inactivity: 5m
+  storage:
+    local:
+      enabled: true
+    encryption_key:
+      value: "iOWlJsBDl25i8GE+POCICVLhqS8WVXewZJkGpEpKwEw="
+  notifier:
+    filesystem:
+      enabled: true
+
+secret:
+  additionalSecrets:
+    authelia-users:
+      path: /users
+      items:
+        - key: users_database.yml
+          path: users_database.yml
+
+ingress:
+  enabled: true
+  className: traefik
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
+  tls:
+    enabled: false
+  traefikCRD:
+    enabled: true
+    disableIngressRoute: true
