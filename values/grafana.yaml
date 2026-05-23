@@ -1,15 +1,14 @@
-admin:
-  existingSecret: grafana-admin
-  userKey: admin-user
-  passwordKey: admin-password
-
 ingress:
   enabled: true
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
   hosts:
     - grafana.jlab.dedyn.io
+  tls:
+    - hosts:
+        - grafana.jlab.dedyn.io
 
 persistence:
   enabled: true
@@ -39,5 +38,6 @@ datasources:
         jsonData:
           sslmode: require
           postgresVersion: 1600
+          database: clearbook
           timescaledb: false
         editable: false
