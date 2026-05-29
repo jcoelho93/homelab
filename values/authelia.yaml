@@ -45,3 +45,6 @@ ingress:
   traefikCRD:
     enabled: true
     disableIngressRoute: true
+    middlewares:
+      auth:
+        enableMaxResponseBodySize: true

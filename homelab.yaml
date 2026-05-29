@@ -23,3 +23,6 @@ masters_pool:
   location: nbg1
 schedule_workloads_on_masters: true
 worker_node_pools: []
+addons:
+  local_path_storage_class:
+    enabled: true

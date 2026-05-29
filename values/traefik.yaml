@@ -22,7 +22,7 @@ ports:
         certResolver: letsencrypt
 
 persistence:
-  enabled: true
+  enabled: false
 
 rbac:
   enabled: true

@@ -5,10 +5,8 @@ repositories:
     url: https://kubernetes-sigs.github.io/metrics-server/
   - name: traefik
     url: https://helm.traefik.io/traefik
-  - name: postgres-operator-charts
-    url: https://opensource.zalando.com/postgres-operator/charts/postgres-operator
-  - name: postgres-operator-ui-charts
-    url: https://opensource.zalando.com/postgres-operator/charts/postgres-operator-ui
+  - name: cnpg
+    url: https://cloudnative-pg.github.io/charts
   - name: grafana
     url: https://grafana.github.io/helm-charts
   - name: authelia
@@ -45,16 +43,7 @@ releases:
   - name: middleware
     namespace: default
     chart: ./charts/middleware
-  - name: postgres-operator
-    namespace: postgres-operator
+  - name: cnpg
+    namespace: cnpg
     createNamespace: true
-    chart: postgres-operator-charts/postgres-operator
-    version: 1.15.1
-    disableValidation: true
-  - name: postgres-operator-ui
-    namespace: postgres-operator
-    createNamespace: true
-    chart: postgres-operator-ui-charts/postgres-operator-ui
-    version: 1.15.1
-    needs:
-      - postgres-operator
+    chart: cnpg/cloudnative-pg

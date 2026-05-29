@@ -1,3 +1,8 @@
+admin:
+  existingSecret: grafana-admin-credentials
+  userKey: admin-user
+  passwordKey: admin-password
+
 ingress:
   enabled: true
   annotations:
@@ -11,16 +16,17 @@ ingress:
         - grafana.jlab.dedyn.io
 
 persistence:
-  enabled: true
-  size: 1Gi
+  enabled: false
 
 grafana.ini:
   server:
     domain: grafana.jlab.dedyn.io
+  auth.ldap:
+    enabled: false
 
 extraSecretMounts:
   - name: postgres-creds
-    secretName: grafana.clearbook-db.credentials.postgresql.acid.zalan.do
+    secretName: clearbook-db-app
     mountPath: /etc/secrets/postgres
     readOnly: true
 
@@ -30,7 +36,7 @@ datasources:
     datasources:
       - name: PostgreSQL
         type: postgres
-        url: clearbook-db.default.svc.cluster.local:5432
+        url: clearbook-db-r.default.svc.cluster.local:5432
         database: clearbook
         user: $__file{/etc/secrets/postgres/username}
         secureJsonData:
