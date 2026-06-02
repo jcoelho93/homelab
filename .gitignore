@@ -3,3 +3,5 @@ secrets/*.yaml
 !secrets/*.enc.yaml
 .env
 .envrc
+.tm
+.tmp

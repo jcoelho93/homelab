@@ -57,3 +57,27 @@ env:
       secretKeyRef:
         name: desec-credentials
         key: token
+
+extraObjects:
+  - apiVersion: traefik.io/v1alpha1
+    kind: Middleware
+    metadata:
+      name: basic-auth
+      namespace: default
+    spec:
+      basicAuth:
+        removeHeader: true
+        secret: clearbook-basic-auth
+  - apiVersion: traefik.io/v1alpha1
+    kind: Middleware
+    metadata:
+      name: rate-limit
+      namespace: default
+    spec:
+      rateLimit:
+        average: 20
+        burst: 10
+        period: 1m
+        sourceCriterion:
+          ipStrategy:
+            depth: 1

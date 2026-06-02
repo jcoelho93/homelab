@@ -7,8 +7,8 @@ repositories:
     url: https://helm.traefik.io/traefik
   - name: cnpg
     url: https://cloudnative-pg.github.io/charts
-  - name: grafana
-    url: https://grafana.github.io/helm-charts
+  - name: grafana-community
+    url: https://grafana-community.github.io/helm-charts
   - name: authelia
     url: https://charts.authelia.com
 
@@ -22,8 +22,8 @@ releases:
       - values/authelia.yaml
   - name: grafana
     namespace: default
-    chart: grafana/grafana
-    version: 10.5.15
+    chart: grafana-community/grafana
+    version: 12.4.1
     values:
       - values/grafana.yaml
     secrets:
