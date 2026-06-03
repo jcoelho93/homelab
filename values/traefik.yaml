@@ -75,7 +75,7 @@ extraObjects:
       namespace: default
     spec:
       rateLimit:
-        average: 20
+        average: 50
         burst: 10
         period: 1m
         sourceCriterion:
