@@ -20,14 +20,6 @@ releases:
     version: 0.11.5
     values:
       - values/authelia.yaml
-  - name: grafana
-    namespace: default
-    chart: grafana-community/grafana
-    version: 12.4.1
-    values:
-      - values/grafana.yaml
-    secrets:
-      - secrets/grafana.enc.yaml
   - name: metrics-server
     namespace: kube-system
     createNamespace: false
@@ -43,7 +35,16 @@ releases:
   - name: middleware
     namespace: default
     chart: ./charts/middleware
+    secrets:
+      - ./charts/middleware/secrets.enc.yaml
   - name: cnpg
     namespace: cnpg
     createNamespace: true
     chart: cnpg/cloudnative-pg
+  - name: grafana-operator
+    namespace: grafana-operator
+    createNamespace: true
+    chart: oci://ghcr.io/grafana/helm-charts/grafana-operator
+    version: 5.23.0
+    values:
+      - values/grafana-operator.yaml

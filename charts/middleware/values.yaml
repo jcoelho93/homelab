@@ -3,3 +3,7 @@ fail2ban:
   findtime: "5m"
   maxretry: 3
   enabled: true
+
+grafana:
+  adminUser: admin
+  adminPassword: ""
