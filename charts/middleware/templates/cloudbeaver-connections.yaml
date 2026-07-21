@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudbeaver-connections
+  namespace: cloudbeaver
+data:
+  data-sources.conf: |
+    {
+      "folders": {},
+      "connections": {
+        "prospero": {
+          "provider": "postgresql",
+          "driver": "postgres-jdbc",
+          "name": "Prospero",
+          "configuration": {
+            "host": "prospero-db-rw.default.svc.cluster.local",
+            "port": "5432",
+            "database": "postgres",
+            "configurationType": "MANUAL",
+            "type": "production",
+            "closeIdleConnection": true,
+            "auth-model": "native",
+            "bootstrap": {
+              "autocommit": true
+            }
+          }
+        }
+      }
+    }
