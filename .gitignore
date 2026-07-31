@@ -6,5 +6,8 @@ secrets/*.yaml
 .tm
 .tmp
 .tfplan
-.terraform.lock.hcl
 .terraform
+
+# terraform CI artifacts
+terraform/tfplan
+terraform/plan.txt
