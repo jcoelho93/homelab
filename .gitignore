@@ -5,3 +5,6 @@ secrets/*.yaml
 .envrc
 .tm
 .tmp
+.tfplan
+.terraform.lock.hcl
+.terraform
