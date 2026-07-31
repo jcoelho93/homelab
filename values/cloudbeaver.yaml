@@ -13,3 +13,18 @@ persistence:
   enabled: true
   storageClass: "local-path"
   size: 1Gi
+
+extraVolumes:
+  - name: cloudbeaver-provided-connections
+    configMap:
+      name: cloudbeaver-provided-connections
+      items:
+        - key: provided_connections
+          path: data-sources.json
+
+extraVolumeMounts:
+  - name: cloudbeaver-provided-connections
+    mountPath: /opt/cloudbeaver/workspace/GlobalConfiguration/.dbeaver/data-sources.json
+    subPath: data-sources.json
+    readOnly: true
+

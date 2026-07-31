@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: cloudbeaver-connections
+  name: cloudbeaver-provided-connections
   namespace: cloudbeaver
 data:
-  data-sources.conf: |
+  provided_connections: |
     {
       "folders": {},
       "connections": {
@@ -15,7 +15,7 @@ data:
           "configuration": {
             "host": "prospero-db-rw.default.svc.cluster.local",
             "port": "5432",
-            "database": "postgres",
+            "database": "prospero",
             "configurationType": "MANUAL",
             "type": "production",
             "closeIdleConnection": true,
